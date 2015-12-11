@@ -1,0 +1,10 @@
+- project:
+    name: build
+    email_to: ''
+    tag: 'refs/tags/1.0.0'
+    plugin_name:
+      - testplugin:
+          plugin_repo: fuel-plugin-testplugin
+    jobs:
+      - 'fuel-plugin.{plugin_name}.build'
+
