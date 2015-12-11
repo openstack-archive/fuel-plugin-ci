@@ -1,0 +1,8 @@
+Verified+2: Jenkins
+Code-Review+2: Alexey Elagin <aelagin@mirantis.com>
+Workflow+1: Alexey Elagin <aelagin@mirantis.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 11 Dec 2015 15:47:00 +0000
+Reviewed-on: https://review.openstack.org/256550
+Project: openstack/fuel-plugin-ci
+Branch: refs/heads/master
