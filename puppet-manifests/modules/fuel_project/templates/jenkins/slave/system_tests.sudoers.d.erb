@@ -1,0 +1,3 @@
+<% @sudo_commands.each {|command| -%>
+jenkins  ALL=(ALL)       NOPASSWD: <%= command %>
+<% } -%>

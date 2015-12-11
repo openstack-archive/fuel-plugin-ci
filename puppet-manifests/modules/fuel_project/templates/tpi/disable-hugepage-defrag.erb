@@ -1,0 +1,26 @@
+#! /bin/sh
+
+
+. /lib/lsb/init-functions
+
+set -e
+
+case "$1" in
+  start)
+        echo 'never' > /sys/kernel/mm/transparent_hugepage/defrag
+        ;;
+  stop)
+        echo 'always' > /sys/kernel/mm/transparent_hugepage/defrag
+        ;;
+  status)
+        grep -q "\[never\]" /sys/kernel/mm/transparent_hugepage/defrag || ( echo "hugepage defrag is ON" && exit 1 )
+        log_success_msg "hugepage defrag is OFF"
+        exit 0
+        ;;
+  *)
+        log_action_msg "Usage: $0 {start|stop|status}"
+        exit 1
+        ;;
+esac
+
+exit 0

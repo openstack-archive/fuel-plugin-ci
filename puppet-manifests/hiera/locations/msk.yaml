@@ -1,0 +1,50 @@
+---
+apt::sources:
+  mirror:
+    location: 'http://mirrors.msk.mirantis.net/ubuntu/'
+    release: "%{::lsbdistcodename}"
+    key: 'C0B21F32'
+    key_server: 'keyserver.ubuntu.com'
+    repos: 'main restricted universe multiverse'
+    include_src: false
+    include_deb: true
+  mirror_updates:
+    location: 'http://mirrors.msk.mirantis.net/ubuntu/'
+    release: "%{::lsbdistcodename}-updates"
+    key: 'C0B21F32'
+    key_server: 'keyserver.ubuntu.com'
+    repos: 'main restricted universe multiverse'
+    include_src: false
+    include_deb: true
+  devops:
+    location: 'http://osci-mirror-msk.msk.mirantis.net/devops/ubuntu/'
+    release: '/'
+    key: '62BF6A9C1D2B45A2'
+    key_server: 'keyserver.ubuntu.com'
+    repos: ''
+    include_src: false
+    include_deb: true
+  docker:
+    location: 'https://get.docker.io/ubuntu'
+    release: 'docker'
+    key: 'A88D21E9'
+    key_server: 'keyserver.ubuntu.com'
+    repos: 'main'
+    include_src: false
+    include_deb: true
+  jenkins:
+    location: 'http://pkg.jenkins-ci.org/debian-stable/'
+    release: 'binary/'
+    key: 'D50582E6'
+    key_server: 'keyserver.ubuntu.com'
+    repos: ''
+    include_src: false
+    include_deb: true
+  elasticsearch:
+    location: 'http://packages.elasticsearch.org/elasticsearch/1.3/debian'
+    release: 'stable'
+    repos: 'main'
+    key: 'D88E42B4'
+    key_server: 'keyserver.ubuntu.com'
+    include_src: false
+    include_deb: true

@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+
+import json
+import sys
+import urllib2
+
+from optparse import OptionParser
+
+parser = OptionParser()
+(options, args) = parser.parse_args()
+
+api_url = '<%= @jenkins_api_url || 'http://localhost:8080' %>'
+
+def usage():
+  print "Usage: jenkins_items.py [OPTIONS]\n"
+  print "  OPTIONS:"
+  print "    executors busy"
+  print "    executors pbusy"
+  print "    executors pfree"
+  print "    executors total"
+  print "    queue"
+  sys.exit(1)
+
+if len(args) == 0:
+  usage()
+
+if args[0] == 'executors':
+  if len(args) == 1:
+    usage()
+
+  ua = urllib2.urlopen('%s/computer/api/json' % api_url)
+  data = json.loads(ua.read())
+
+  if args[1] == 'busy':
+    print data['busyExecutors']
+  elif args[1] == 'pbusy':
+    print (float(data['busyExecutors']) / float(data['totalExecutors']) * 100)
+  elif args[1] == 'pfree':
+    print (100 - (float(data['busyExecutors']) / float(data['totalExecutors']) * 100))
+  elif args[1] == 'total':
+    print data['totalExecutors']
+  else:
+    usage()
+elif args[0] == 'queue':
+  ua = urllib2.urlopen('%s/queue/api/json' % api_url)
+  data = json.loads(ua.read())
+
+  print len(data['items'])
+else:
+  usage()

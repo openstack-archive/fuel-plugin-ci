@@ -1,0 +1,3 @@
+---
+classes:
+  - '::fuel_project::puppet::master'

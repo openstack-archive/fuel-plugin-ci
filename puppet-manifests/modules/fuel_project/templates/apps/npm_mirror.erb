@@ -1,0 +1,5 @@
+- from: <%= @upstream_mirror %>
+  to: <%= @npm_dir %>
+  server: http://<%= @service_fqdn %>
+  parallelism: <%= @parallelism %>
+  recheck: <%= @recheck ? 'true' : 'false' %>

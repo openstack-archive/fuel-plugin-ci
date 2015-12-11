@@ -1,0 +1,6 @@
+<% if @osfamily == 'Debian' %>
+UserParameter=system.software.packages,dpkg-query --show | awk '{print $1"="$2}'
+<% elsif @osfamily == 'RedHat' %>
+UserParameter=system.software.packages,rpm -qa
+<% end %>
+UserParameter=system.software.services,sudo netstat -utpln | grep -v 'Active Internet connections\|PID/Program name' | awk '{print $NF}' | cut -d/ -f2 | sort -u

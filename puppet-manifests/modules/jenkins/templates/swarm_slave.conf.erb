@@ -1,0 +1,45 @@
+# defaults for jenkins-slave component of the jenkins continuous integration
+# system
+
+# pulled in from the init script; makes things easier.
+NAME=jenkins-swarm-slave
+
+# location of java
+JAVA=/usr/bin/java
+
+# arguments to pass to java - optional
+#JAVA_ARGS="-Xmx256m"
+
+# for daemon to use
+PIDFILE=/var/run/jenkins/$NAME.pid
+
+# user id to be invoked as (otherwise will run as root; not wise!)
+JENKINS_USER=jenkins
+
+# location of jenkins arch indep files
+JENKINS_ROOT=/usr/share/jenkins
+
+# jenkins home location
+JENKINS_HOME=/home/jenkins
+
+# jenkins /run location
+JENKINS_RUN=/var/run/jenkins
+
+# Name of the slave
+JENKINS_SLAVE_NAME="<%= @fqdn %>"
+
+# Log file location for use in Debian init script
+JENKINS_SLAVE_LOG=/var/log/jenkins/$NAME.log
+
+if [ "$USE_CACHED_LABELS" == "true" ] && test -f /etc/default/jenkins.labels
+then
+  JENKINS_LABELS="$(cat /etc/default/jenkins.labels)"
+else
+  JENKINS_LABELS="<%= @labels.downcase %>"
+fi
+
+JENKINS_MASTER_URL="<%= @master %>"
+
+# Arguments to pass to jenkins slave on startup
+JENKINS_ARGS="-name $JENKINS_SLAVE_NAME -master $JENKINS_MASTER_URL -username <%= @user %> -password <%= @password %> -mode exclusive -fsroot $JENKINS_HOME"
+

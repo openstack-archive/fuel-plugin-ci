@@ -1,0 +1,53 @@
+#!/bin/sh
+
+FILE="$1"
+APP="$2"
+
+if [ -z "$FILE" ] || [ -z "$APP" ]
+then
+	echo "USAGE: $0 FILE APP" >&2
+	exit 1
+fi
+
+if [ "x$FILE" != "x-" ] && ! [ -f "$FILE" ]
+then
+	echo "FILE $FILE does not exist" >&2
+	exit 1
+fi
+
+[ -d "/tmp/tailnew/$APP" ] || mkdir -p "/tmp/tailnew/$APP"
+
+OLD_END=0
+if [ -f "/tmp/tailnew/$APP/end" ]
+then
+	OLD_END=$(cat "/tmp/tailnew/$APP/end")
+fi
+
+if [ "x$FILE" = "x-" ]
+then
+    CACHE=""
+    while read c
+    do
+        CACHE="$CACHE\n$c"
+    done
+
+    if [ -z "$CACHE" ]
+    then
+        exit 0
+    fi
+
+    END=$(echo -n "$CACHE" | wc -l | awk '{print $1}')
+else
+    END=$(wc -l "$FILE" | awk '{print $1}')
+fi
+
+LINES=$(($END - $OLD_END))
+
+echo $END > "/tmp/tailnew/$APP/end"
+
+if [ "x$FILE" = "x-" ]
+then
+    echo "$CACHE" | tail -n $LINES
+else
+    tail -n $LINES "$FILE"
+fi

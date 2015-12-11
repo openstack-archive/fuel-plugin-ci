@@ -1,0 +1,5 @@
+#!/bin/bash
+
+<% @facts.each {|k, v| %>
+echo "<%= k %>=<%= v %>"
+<% } %>

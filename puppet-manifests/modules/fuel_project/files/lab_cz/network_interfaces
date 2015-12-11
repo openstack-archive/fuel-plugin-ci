@@ -1,0 +1,23 @@
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+
+auto eth1.221
+iface eth1.221 inet manual
+
+auto eth1.222
+iface eth1.222 inet manual
+
+auto eth1.223
+iface eth1.223 inet manual
+
+auto eth1.224
+iface eth1.224 inet manual
+
+auto eth1.225
+iface eth1.225 inet manual
+
+auto eth1.226
+iface eth1.226 inet manual

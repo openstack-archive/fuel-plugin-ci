@@ -1,0 +1,93 @@
+---
+classes:
+  - '::fuel_project::jenkins::master'
+
+fuel_project::jenkins::master::install_label_dumper: true
+fuel_project::jenkins::master::install_plugins: true
+fuel_project::jenkins::master::service_fqdn: 'jenkins.test-company.org'
+
+jenkins::master::install_groovy: true
+jenkins::master::jenkins_cli_file: '/var/cache/jenkins/war/WEB-INF/jenkins-cli.jar'
+jenkins::master::jenkins_cli_tries: '6'
+jenkins::master::jenkins_cli_try_sleep: '30'
+jenkins::master::jenkins_libdir: '/var/lib/jenkins'
+jenkins::master::jenkins_management_email: 'jenkin@example.com'
+jenkins::master::jenkins_management_login: 'jenkins-manager'
+jenkins::master::jenkins_management_name: 'Jenkins Master'
+jenkins::master::jenkins_management_password: 'jenkins_password'
+jenkins::master::jenkins_s2m_acl: true
+jenkins::master::security_model: 'ldap'
+jenkins::master::security_opt_params: ''
+jenkins::master::service_fqdn: 'jenkins-product.test.local'
+jenkins::master::ssl_key_file: '/etc/ssl/jenkins.key'
+jenkins::master::ssl_key_file_contents: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC2OB+nAmxkHPht
+    j9CBXr1LU/n7nh37WUDGahYN775RLcR3NUZZHz6hoc7hyvEPO1PI5Mm2y0L8yREJ
+    meDFRl1yknP1Pe/vSlP+1+73l9UlpfV8uNwJ3DfAPUgxwYjOO0zMMu6Nih4zuZ2N
+    H2LHM3laJAWeeBCTCp4SxCW1XeMlKqfdT4/T3eXp5WdJ1+EtP6rya9Zivx+HHh6X
+    dIfKTypGiZiPiCewQnd0a2MM0X0IjtcvalldV4M9llAojkVze1idIBRu9c7t914C
+    fZAsbSSe2Q8s8YYAmymvxWrchz+CVs8GPoGx1iPSM4zBZFikJXaWT8IVk3TcFTHo
+    k9AzFtYdAgMBAAECggEBAJdwr4W6suDFXwaXhp9uYH4xbcpbz+ksdXQxiODORmrr
+    UaQNR8kb+Y6Vjv4DDzMsiGanFqnv5l12sc078R2jbFijNPI2JqnGKWbciYOG0aO3
+    eP3OGTmspz0C8XRAt3VGvX3cOnyxtIYilrlJw2tw8UMkOvNIL+Y05ckM8ZX5UKV6
+    lVJ30HO2jR6T5yM/Gc3s3gL/X5bHcaQDLWjhqZP411zULQPsWP8+bbXv8f+jZqcg
+    jg4oK1mC2MtGjy83DU5CqxZKPiISXm48RDDe8HAUrnkEMQAnHPdQymMv+d9kDv2y
+    6sp1ov3BQCfZm0mHkSW+wdnzwjNnPHZZ2FdvRz7V3GECgYEA5eFYdA9vuTbFhtod
+    foxHzmqZXBQM6ToXYEKFgdNYvHDISXNdsB4DyUT4V46bxpTMLynMqvM59/u16jaP
+    lo4DkkRLG/GxvGeFM/0odPMnoGTL0HBMJiYr7U3tgtEu2t2RqmVc2tpDPzQ0Mwaj
+    dqHPFId1p1AHeeX1MxeuTLPkA5UCgYEAyuxvfgoBfsDad5E3EbFrilrRJRbb3yxQ
+    hgilaISaSDn0MWZ3zE+pTCwuA9HYmjwr4GCeO8kSCpnhI4BKASMa4p0SLsTr0i/9
+    OUulLi3ZieWA2mqekqUo/CaccMhMfGr4AVQ3WeK3cjKXj/j/WnKTfHSB5uL2bvFg
+    XoqfXcOUZmkCgYBjkkdBBkqrXBkU/zcVUGft9eh1pM2u3BWyAT5Y7JWcEfH/NrRX
+    C7kyHei/7Cp3So5iw2U+itoKGwJB794kJWFQorox4W/OHrzotvgmKAh7Bg3uPCYP
+    xCr0v/Nn3XnBHYXx27Prq+zC3Lbbfz2grhfHWaFRlm2WlE+wEMrTuHvEPQKBgEM9
+    XSRShHRPyxRblffS5mON/Edh77Ffqb8AFm8voT/VlEjaP1AABYUsDoNNgYx568AJ
+    w+Tjl4rTunpdBCikTUBR87hzoAChzjKyEiXfI3pCBhRZx/mnqJEE6kmk1VNUzqEC
+    GuU57rd0dCxMwbBizuQqZvDuu+G/McOiA3S6Xe4hAoGAYs01BdHeksEyZK+q0TIR
+    cHJOyX0ae4ClfXyJ6moQbPr9uoDs0g+3p8IZtiEwVatpmQB2DIoE6jF81rsKBK68
+    tHQtn8ywdYDgJbqhx2Y4XP+9CeNhsRAya8SxFmQMirdtWNltMNvTXHFEoVWbf9Yz
+    Sb2NcH2bS0mjAlLmBCPYqsA=
+    -----END PRIVATE KEY-----
+
+jenkins::master::jenkins_ssh_private_key_contents: |
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEogIBAAKCAQEAzVoDH+iIrEmNBytJqR5IFYUcR7A6JvNTyelt4wIHEgVmNSs/
+    9ry/fEivdaaYGJpw2tri23IWNl5PXInnzKZu0KuRDuqEjyiSYQA8gmAF/+2KJmSM
+    uF7ux8RIdGelQi7dA8psDeLQUvSbkyErxJtewS4LYrPwHpgNnkSJdCQHT3/a5kKb
+    OCj+QIRutLnHbUyg9MvExSveWrXqZYHKvSS0SJ4a3YP75yS2yp1e5T9YOXX2Na5u
+    m7puz/icH9rXUzmtG+bnCv/ollW8jzuGdmnz6W5YeFcp33tsDM86RgKd5+TMLR9h
+    GZkl5vwevwpIDhUTrJlh/DM0BLzQRh4cPjjUfQIDAQABAoIBAGQO0OjyR+4S5Imy
+    uPCTlbIOqunvX1ZtR81hVS7AZSuNv/B2Q3N5IqBvVjcwVnneftDUyKb+nv4c0/SW
+    KYEZM3OvtT2cXbzXmwNytwkburCqUJ9GbR7E+voRlPBLNEXcScq4DhByDOnu0ANP
+    rWDeB7x/MAMHBCAUHMaaRJN3nqxIEvvzKK0B3GpRsVgGLDTQ4wX9ojmPQ7H8QQVV
+    ZnfiJxhXoXbcQUudwn2etMOQpnOzq+fUSj2U6U+pxnkQBcdb2TUqLVOdKqzV4Xwc
+    u/mqmtMRb6cjRpH+J1ajZqgbn6yw756TmP/LT5Jb0l/tI4b/HrPlXuXSJHtLFvQE
+    D00tK+ECgYEA+Gk447CteVDmkKU/kvDh9PVbZRsuF24w+LK6VLLxSp94gGIlHyNN
+    WdamBZviBIOnyz8x3WPd8u2LnkBla7L4iJgh/v5XgAK4I5ES94VGiEnEWJDXVKOY
+    JW9mRH7CElmhRbhVuMQoEDonhiLNLnRwwwjF79dSlANpJxioMCVOMkUCgYEA06AH
+    sx5gzdCt1OAgR2XPANMLdOgufjWsQiZtCIlLQTxzEjmF3uwsWy+ugVQIFZnwIUxw
+    5O41uDji1lwE/ond15oBMFB97unzsgFW3uHSV7yWJv1SVP7LSXZnBIRhwqsozYNL
+    3py9k/EvuZ4P+EoR8F3COC5gg62qxO5L2P3O2NkCgYAJ+e/W9RmCbcVUuc470IDC
+    nbf174mCV2KQGl1xWV5naNAmF8r13S0WFpDEWOZS2Ba9CuStx3z6bJ/W0y8/jAh/
+    M9zpqL1K3tEWXJUua6PRhWTlSavcMlXB6x9oUM7qfb8EVcrbiMUzIaLEuFEVNIfy
+    zT9lynf+icSHVW4rwNPLIQKBgCJ0VYyWD5Cyvvp/mwHE05UAx0a7XoZx2p/SfcH8
+    CGKQovN+pgsLTJV0B+dKdR5/N5dUSLUdC2X47QWVacK/U3z8t+DT2g0BzglXKnuT
+    LJnYPGIQsEziRtqpClCz9O6qyzPagom13y+s/uYrk9IKzSzjNvHKqzAFIF57paGo
+    gPrRAoGAClmcMYF4m48mnMAj5htFQg1UlE8abKygoWRZO/+0uh9BrZeQ3jsWnUWW
+    3TWXEjB/RazdPB0PWfc3kjruz8IhDsLKQYPX+h8JuLO8ZL20Mxo7o3bs/GQnDrw1
+    g/PCKBJscu0RQxsa16tt5aX/IM82cJR6At3tTUyUpiwqNsVClJs=
+    -----END RSA PRIVATE KEY-----
+
+
+jenkins::master::jenkins_ssh_public_key_contents: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNWgMf6IisSY0HK0mpHkgVhRxHsDom81PJ6W3jAgcSBWY1Kz/2vL98SK91ppgYmnDa2uLbchY2Xk9ciefMpm7Qq5EO6oSPKJJhADyCYAX/7YomZIy4Xu7HxEh0Z6VCLt0DymwN4tBS9JuTISvEm17BLgtis/AemA2eRIl0JAdPf9rmQps4KP5AhG60ucdtTKD0y8TFK95ateplgcq9JLRInhrdg/vnJLbKnV7lP1g5dfY1rm6bum7P+Jwf2tdTOa0b5ucK/+iWVbyPO4Z2afPpblh4Vynfe2wMzzpGAp3n5MwtH2EZmSXm/B6/CkgOFROsmWH8MzQEvNBGHhw+ONR9'
+jenkins::master::jenkins_address: '127.0.0.1'
+jenkins::master::jenkins_proto: 'http'
+jenkins::master::jenkins_port: '8080'
+jenkins::master::jenkins_java_args: '-Xmx1500m -Xms1024m -Dorg.apache.commons.jelly.tags.fmt.timeZone=Europe/Moscow'
+jenkins::master::jjb_username: 'jjb_user'
+jenkins::master::jjb_password: 'jjb_pass'
+jenkins::master::firewall_allow_sources:
+  '1000 - jenkins connections from 0.0.0.0/0':
+    source: '0.0.0.0/0'
+#jenkins::master::nginx_log_format: 'proxy'

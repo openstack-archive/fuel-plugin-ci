@@ -1,0 +1,17 @@
+{
+  "storage_path" : "/var/lib/btsync/",
+  "check_for_updates" : false,
+  "shared_folders" :
+  [
+    {
+      "secret" : "<%= @btsync_secret %>",
+      "dir" : "/btsync/",
+      "use_relay_server" : true,
+      "use_tracker" : true,
+      "use_dht" : false,
+      "search_lan" : true,
+      "use_sync_trash" : false,
+      "overwrite_changes" : false
+    }
+  ]
+}

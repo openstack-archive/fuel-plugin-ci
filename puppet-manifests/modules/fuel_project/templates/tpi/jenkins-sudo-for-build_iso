@@ -1,0 +1,2 @@
+Defaults!/btsync/build_iso.sh setenv
+jenkins  ALL=(ALL)       NOPASSWD: /btsync/build_iso.sh

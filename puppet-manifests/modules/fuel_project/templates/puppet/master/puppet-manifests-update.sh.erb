@@ -1,0 +1,47 @@
+#!/bin/bash
+
+set -e
+
+export BRANCH=${BRANCH:-<%= @manifests_branch %>}
+export TMPDIR=${TMPDIR:-<%= @manifests_tmpdir %>}
+export REPO=${REPO:-<%= @manifests_repo %>}
+export BINPATH=${BINPATH:-<%= @manifests_binpath %>}
+export MANIFESTSPATH=${MANIFESTSPATH:-<%= @manifests_manifestspath %>}
+export MODULESPATH=${MODULESPATH:-<%= @manifests_modulespath %>}
+
+(
+  flock -n 9 || exit 1
+  echo "Clean up..."
+  rm -rf "${TMPDIR}"
+
+  echo "Cloning..."
+  git clone "${REPO}" "${TMPDIR}"
+  cd "${TMPDIR}"
+  git checkout "${BRANCH}"
+
+  REVISION=`git log -1 HEAD | fgrep commit | awk '{print $NF}'`
+  PREV_REVISION=`cat /tmp/puppet-manifests-revision.txt 2>/dev/null || echo -n none`
+  echo -n "${REVISION}" > /tmp/puppet-manifests-revision.txt
+
+  echo "Revision: \$Id: ${REVISION} \$"
+  echo "Previous revision: ${PREV_REVISION}"
+
+  if [[ "${REVISION}" == "${PREV_REVISION}" ]]; then
+    echo "No updates found."
+    exit 0
+  fi
+
+  sed -i 's~\$Id\$~\$Id: '${REVISION}' \$~' "${TMPDIR}/manifests/site.pp"
+
+  echo "Linking..."
+  rm -rf "${BINPATH}"
+  rm -rf "${MANIFESTSPATH}"
+  rm -rf "${MODULESPATH}"
+
+  mv "${TMPDIR}/bin" "${BINPATH}"
+  mv "${TMPDIR}/manifests" "${MANIFESTSPATH}"
+  mv "${TMPDIR}/modules" "${MODULESPATH}"
+
+  echo "Running modules update"
+  ${BINPATH}/install_modules.sh
+) 9>/var/lock/puppet-manifests-update.lock

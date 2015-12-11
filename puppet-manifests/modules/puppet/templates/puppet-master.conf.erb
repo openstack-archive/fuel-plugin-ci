@@ -1,0 +1,8 @@
+[master]
+  <% if @environment %>environment = <%= @environment %><% end %>
+  <% if @hiera_config %>hiera_config = <%= @hiera_config %><% end %>
+  <% if @autosign %>autosign = <%= @autosign %><% end %>
+  <% if @puppet_master_run_with == 'nginx+uwsgi' %>
+  ssl_client_header        = SSL_CLIENT_S_DN
+  ssl_client_verify_header = SSL_CLIENT_VERIFY
+  <% end %>

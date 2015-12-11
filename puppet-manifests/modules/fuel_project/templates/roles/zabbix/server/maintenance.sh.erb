@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -ex
+
+/usr/bin/mysql --defaults-file=<%= @maintenance_script_config -%> \
+  -e "CALL partition_maintenance_all('zabbix');" \
+  'zabbix'

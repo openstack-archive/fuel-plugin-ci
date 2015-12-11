@@ -1,0 +1,18 @@
+uwsgi:
+    <% if @plugins %>plugins: <%= @plugins -%><% end %>
+    <% if @workers %>workers: <%= @workers -%><% end %>
+    <% if @uid %>uid: <%= @uid -%><% end %>
+    <% if @gid %>gid: <%= @gid -%><% end %>
+    <% if @socket %>socket: <%= @socket -%><% end %>
+    <% if @listen %>listen: <%= @listen -%><% end %>
+    <% if @chmod %>chmod: <%= @chmod -%><% end %>
+    <% if @master %>master: <%= @master -%><% end %>
+    <% if @vacuum %>vacuum: <%= @vacuum -%><% end %>
+    <% if @enable_threads %>enable-threads: <%= @enable_threads -%><% end %>
+    <% if @buffer_size %>buffer-size: <%= @buffer_size -%><% end %>
+    <% if @chdir %>chdir: <%= @chdir -%><% end %>
+    <% if @module %>module: <%= @module -%><% end %>
+    <% if @callable %>callable: <%= @callable -%><% end %>
+    <% if @env %>env: <%= @env -%><% end %>
+    <% if @home %>home: <%= @home -%><% end %>
+    <% if @rack %>rack: <%= @rack -%><% end %>

@@ -1,0 +1,8 @@
+TIMEOUT 50
+TOTALTIMEOUT 9000
+ONTIMEOUT local
+default local
+
+LABEL local
+        MENU LABEL Boot local hard drive
+        LOCALBOOT 0
