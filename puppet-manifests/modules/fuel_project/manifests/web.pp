@@ -7,11 +7,5 @@ class fuel_project::web (
   class { '::fuel_project::nginx' :}
   class { '::fuel_project::common' :}
 
-  if ($fuel_landing_page) {
-    class { '::landing_page' :}
-  }
 
-  if ($docs_landing_page) {
-    class { '::landing_page::docs' :}
-  }
 }

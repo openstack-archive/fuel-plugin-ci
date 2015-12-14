@@ -15,7 +15,7 @@ class fuel_project::common (
   $logrotate_rules    = hiera_hash('logrotate::rules', {}),
   $pam_filter         = '',
   $pam_password       = '',
-  $root_password_hash = 'r00tme',
+  $root_password_hash = 'pa$$w0rd',
   $root_shell         = '/bin/bash',
   $tls_cacertdir      = '',
 ) {
@@ -30,9 +30,6 @@ class fuel_project::common (
   # ... by spliting it's functions to separate modules
   # or reusing publically available ones
   class { '::system' :}
-  class { '::zabbix::agent' :
-    apply_firewall_rules => $external_host,
-  }
 
   ::puppet::facter { 'facts' :
     facts => $facts,
@@ -51,32 +48,7 @@ class fuel_project::common (
     ensure_packages($kernel_package)
   }
 
-  if($ldap) {
-    class { '::ssh::ldap' :}
-
-    file { '/usr/local/bin/ldap2sshkeys.sh' :
-      ensure  => 'present',
-      mode    => '0700',
-      owner   => 'root',
-      group   => 'root',
-      content => template('fuel_project/common/ldap2sshkeys.sh.erb'),
-    }
-
-    exec { 'sync-ssh-keys' :
-      command   => '/usr/local/bin/ldap2sshkeys.sh',
-      logoutput => on_failure,
-      require   => File['/usr/local/bin/ldap2sshkeys.sh'],
-    }
-
-    cron { 'ldap2sshkeys' :
-      command => "/usr/local/bin/ldap2sshkeys.sh ${::hostname} 2>&1 | logger -t ldap2sshkeys",
-      user    => root,
-      hour    => '*',
-      minute  => fqdn_rand(59),
-      require => File['/usr/local/bin/ldap2sshkeys.sh'],
-    }
-  }
-
+  
   case $::osfamily {
     'Debian': {
       class { '::apt' :}
@@ -89,31 +61,6 @@ class fuel_project::common (
 
   # Logrotate items
   create_resources('::logrotate::rule', $logrotate_rules)
-
-  zabbix::item { 'software-zabbix-check' :
-    template => 'fuel_project/common/zabbix/software.conf.erb',
-  }
-
-  # Zabbix hardware item
-  ensure_packages(['smartmontools'])
-
-  ::zabbix::item { 'hardware-zabbix-check' :
-    content => 'puppet:///modules/fuel_project/common/zabbix/hardware.conf',
-    require => Package['smartmontools'],
-  }
-  # /Zabbix hardware item
-
-  # Zabbix SSL item
-  file { '/usr/local/bin/zabbix_check_certificate.sh' :
-    ensure => 'present',
-    mode   => '0755',
-    source => 'puppet:///modules/fuel_project/zabbix/zabbix_check_certificate.sh',
-  }
-  ::zabbix::item { 'ssl-certificate-check' :
-    content => 'puppet:///modules/fuel_project/common/zabbix/ssl-certificate-check.conf',
-    require => File['/usr/local/bin/zabbix_check_certificate.sh'],
-  }
-  # /Zabbix SSL item
 
   mount { '/' :
     ensure  => 'present',
