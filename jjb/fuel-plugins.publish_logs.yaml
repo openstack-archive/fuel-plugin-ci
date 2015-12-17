@@ -1,0 +1,46 @@
+- job:
+    name: 'fuel-plugins.publish_logs'
+    concurrent: true
+    description: Publish jobs artifacts to external host
+    logrotate:
+      artifactDaysToKeep: 30
+    node: plugins-ci
+    properties:
+      - heavy-job:
+          weight: '1'
+      - throttle:
+          max-per-node: 1
+          option: project
+    parameters:
+      - string:
+          name: REPORTED_JOB_URL
+      - string:
+          name: REPORTED_JOB_NAME
+      - string:
+          name: REPORTED_BUILD_ID
+    builders:
+      - shell:
+          !include-raw builders/publish_build_to_external.sh
+      - copyartifact:
+          project: $REPORTED_JOB_NAME
+          target: logs/
+          which-build: upstream-build
+          flatten: true
+          optional: true
+    wrappers:
+      - ansicolor:
+          colormap: xterm
+      - timeout:
+          fail: true
+          timeout: 10
+          write-description: true
+    publishers:
+      - ssh:
+          site: 'ci-logs.testcompany.org'
+          target: '$REPORTED_JOB_NAME/$REPORTED_BUILD_ID'
+          source: 'logs/*'
+          flatten: true
+      - email:
+          notify-every-unstable-build: false
+          recipients: devops@testcompany.org
+          send-to-individuals: false
