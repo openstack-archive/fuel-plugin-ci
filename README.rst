@@ -18,15 +18,19 @@ First you should install puppet master and run the manifests.
 All nodes described in ``manifests/site.pp`` file.
 
 CI needs the following amount of nodes:
+
 * one node for jenkins master
 * one more for jenkins slave 
 * one for log publication.
 
 
-These nodes should be described in ``manifests/site.pp`` with necessary classes::
-``class { '::fuel_project::jenkins::slave':}``
-``class { '::fuel_project::jenkins::master':}``
-``class {‘::fuel_project::web:}``
+These nodes should be described in ``manifests/site.pp`` with necessary classes:
+
+::
+
+      class { '::fuel_project::jenkins::slave':}
+      class { '::fuel_project::jenkins::master':}
+      class {‘::fuel_project::web:}
 
 Run install script ``sudo puppet-manifests/bin/install_puppet_master.sh`` on every node.
 
@@ -35,10 +39,15 @@ Gerrit Integration overview
 
 In general, the installation should meet the following
 requirements:
+
 * Anonymous users can read all projects.
+
 * All registered users can perform informational code review (+/-1) on any project.
+
 * Jenkins can perform verification (blocking or approving: +/-1).
+
 * All registered users can create changes.
+
 * Members of core group can perform full code review (blocking or approving: +/- 2)
   and submit changes to be merged.
 
@@ -67,13 +76,20 @@ Jenkins gerrit plugin configuration
 #. Vote configuration.
 
 #. Log publication
-The result of job are artifacts - logs and packages. Logs should be published on special web servers, where it can be accessible via gerrit. Web server deploys with puppet class fuel_project::web. Logs copy via ssh by job fuel-plugins.publish_logs. You should add new user with rsa key installed and necessary path accessible for write (like /var/www/logs). REPORTED_JOB_URL variable is responsible for url of logs in gerrit.
+   The result of job are artifacts - logs and packages.
+   Logs should be published on special web servers, where it can be accessible via gerrit.
+ Web server deploys with puppet class ``fuel_project::web``.
+
+Logs copy via ssh by job ``fuel-plugins.publish_logs``. You should add new user with rsa key installed and necessary path accessible for write (like ``/var/www/logs``).
+
+The ``REPORTED_JOB_URL`` variable is responsible for url of logs in gerrit.
 
 
 Jenkins plugins installation
 -----------------------------
 We recommend to install these plugins for Jenkins.
-Some of them are necessary for CI and other is just useful and make your jenkins experience easier: 
+Some of them are necessary for CI and other is just useful and make your jenkins experience easier:
+
 * `AnsiColor <https://wiki.jenkins-ci.org/display/JENKINS/AnsiColor+Plugin>`_
 * `Ant Plugin <https://wiki.jenkins-ci.org/display/JENKINS/AnsiColor+Plugin>`_
 * `build timeout plugin <https://wiki.jenkins-ci.org/display/JENKINS/Build-timeout+Plugin>`_
@@ -212,15 +228,16 @@ This script checks for new community build of Fuel and if there is new version a
 You can run the script on jenkins-slave node or any web server if you have many slave nodes.
 Steps:
 
-#. Check for the latest community iso. Using w3m utility script checks ``https://www.fuel-infra.org/release/status`` url and choose right tab:
+#. Check for the latest community iso. Using w3m utility script checks
+   ``https://www.fuel-infra.org/release/status`` url and chooses the right tab:
 
-  * the first tab is 8.0 now, we need 2nd tab with Fuel 7.0.
+   * the first tab is 8.0 now, we need 2nd tab with Fuel 7.0.
 
-  * Then we parse it and get Fuel release string.
+   * Then we parse it and get Fuel release string.
 
-  .. note:: if new Fuel version is available, you should fix the
-     script and change tab number. Also output may change between
-     linux distros and last cut field may change.
+     .. note:: if new Fuel version is available, you should fix the
+        script and change tab number. Also output may change between
+        linux distros and last cut field may change.
 
 
 #. Download torrent file from `http://seed.fuel-infra.org/fuelweb-iso/` via aria2 console torrent client.
