@@ -7,6 +7,9 @@ Overview
 Components, concept
 
 
+.. image:: pics/Fuel-plugin-CI.png
+
+
 Jenkins and web server for logs installation
 --------------------------------------------
 
@@ -20,7 +23,7 @@ CI needs the following amount of nodes:
 * one for log publication.
 
 
-These nodes should be described in ``manifests/site.pp`` with necessary classes:
+These nodes should be described in ``manifests/site.pp`` with necessary classes::
 ``class { '::fuel_project::jenkins::slave':}``
 ``class { '::fuel_project::jenkins::master':}``
 ``class {‘::fuel_project::web:}``
@@ -52,13 +55,14 @@ requirements:
 Jenkins gerrit plugin configuration
 +++++++++++++++++++++++++++++++++++
 
-#. The settings looks as follows:
+#. The settings look as follows:
 
-   <pic>
+   .. image:: pics/settings.png
 
 #. It's main gerrit configuration window. You should add a gerrit server.
 
-   <pic>
+   .. image:: pics/settings-full.png
+
 
 #. Vote configuration.
 
@@ -70,55 +74,55 @@ Jenkins plugins installation
 -----------------------------
 We recommend to install these plugins for Jenkins.
 Some of them are necessary for CI and other is just useful and make your jenkins experience easier: 
-`AnsiColor <https://wiki.jenkins-ci.org/display/JENKINS/AnsiColor+Plugin>`_
-`Ant Plugin <https://wiki.jenkins-ci.org/display/JENKINS/AnsiColor+Plugin>`_
-`build timeout plugin <https://wiki.jenkins-ci.org/display/JENKINS/Build-timeout+Plugin>`_
-`conditional buildstep <https://wiki.jenkins-ci.org/display/JENKINS/Conditional+BuildStep+Plugin>`_
-`Copy Artifact Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Copy+Artifact+Plugin>`_
-`Credentials Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Credentials+Plugin>`_
-`CVS Plug-in <https://wiki.jenkins-ci.org/display/JENKINS/CVS+Plugin>`_
-`description setter plugin <https://wiki.jenkins-ci.org/display/JENKINS/Description+Setter+Plugin>`_
-`Email Extension Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Email-ext+plugin>`_
-`Environment Injector Plugin <https://wiki.jenkins-ci.org/display/JENKINS/EnvInject+Plugin>`_
-`External Monitor Job Type Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Monitoring+external+jobs>`_
-`Gerrit Trigger <https://wiki.jenkins-ci.org/display/JENKINS/Gerrit+Trigger>`_
-`GIT client plugin <https://wiki.jenkins-ci.org/display/JENKINS/Git+Client+Plugin>`_
-`GIT plugin <https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin>`_
-`Groovy <https://wiki.jenkins-ci.org/display/JENKINS/Groovy+plugin>`_
-`Heavy Job Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Heavy+Job+Plugin>`_
-`HTML Publisher plugin <https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin>`_
-`Javadoc Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Javadoc+Plugin>`_
-`Job Configuration History Plugin <https://wiki.jenkins-ci.org/display/JENKINS/JobConfigHistory+Plugin>`_
-`JUnit Plugin <https://wiki.jenkins-ci.org/display/JENKINS/JUnit+Plugin>`_
-`LDAP Plugin <https://wiki.jenkins-ci.org/display/JENKINS/LDAP+Plugin>`_
-`Locale plugin <https://wiki.jenkins-ci.org/display/JENKINS/Locale+Plugin>`_
-`Mailer Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Mailer>`_
-`MapDB API Plugin <https://wiki.jenkins-ci.org/display/JENKINS/MapDB+API+Plugin>`_
-`Matrix Authorization Strategy Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Matrix+Authorization+Strategy+Plugin>`_
-`Matrix Project Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Matrix+Project+Plugin>`_
-`Maven Integration plugin <https://wiki.jenkins-ci.org/display/JENKINS/Maven+Project+Plugin>`_
-`Multijob plugin <https://wiki.jenkins-ci.org/display/JENKINS/Multijob+Plugin>`_
-`Multiple SCMs plugin <https://wiki.jenkins-ci.org/display/JENKINS/Multiple+SCMs+Plugin>`_
-`OWASP Markup Formatter Plugin <https://wiki.jenkins-ci.org/display/JENKINS/OWASP+Markup+Formatter+Plugin>`_
-`PAM Authentication plugin <https://wiki.jenkins-ci.org/display/JENKINS/PAM+Authentication+Plugin>`_
-`Parameterized Trigger plugin <https://wiki.jenkins-ci.org/display/JENKINS/Parameterized+Trigger+Plugin>`_
-`Publish Over SSH <https://wiki.jenkins-ci.org/display/JENKINS/Publish+Over+SSH+Plugin>`_
-`PWauth Security Realm <http://wiki.hudson-ci.org/display/HUDSON/pwauth>`_
-`Run Condition Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Run+Condition+Plugin>`_
-`SCM API Plugin <https://wiki.jenkins-ci.org/display/JENKINS/SCM+API+Plugin>`_
-`Script Security Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Script+Security+Plugin>`_
-`Self-Organizing Swarm Plug-in Modules <https://wiki.jenkins-ci.org/display/JENKINS/Swarm+Plugin>`_
-`Simple Theme Plugin <http://wiki.jenkins-ci.org/display/JENKINS/Simple+Theme+Plugin>`_
-`SSH Agent Plugin <https://wiki.jenkins-ci.org/display/JENKINS/SSH+Agent+Plugin>`_
-`SSH Credentials Plugin <https://wiki.jenkins-ci.org/display/JENKINS/SSH+Credentials+Plugin>`_
-`SSH Slaves plugin <http://wiki.jenkins-ci.org/display/JENKINS/SSH+Slaves+plugin>`_
-`Subversion Plug-in <http://wiki.jenkins-ci.org/display/JENKINS/Subversion+Plugin>`_
-`Throttle Concurrent Builds Plug-in <http://wiki.jenkins-ci.org/display/JENKINS/Throttle+Concurrent+Builds+Plugin>`_
-Timestamper
-`Token Macro Plugin <http://wiki.jenkins-ci.org/display/JENKINS/Token+Macro+Plugin>`_
-`Translation Assistance plugin <http://wiki.jenkins-ci.org/display/JENKINS/Translation+Assistance+Plugin>`_
-`Windows Slaves Plugin <http://wiki.jenkins-ci.org/display/JENKINS/Windows+Slaves+Plugin>`_
-`Workflow: Step API <https://wiki.jenkins-ci.org/display/JENKINS/Workflow+Plugin>`_
+* `AnsiColor <https://wiki.jenkins-ci.org/display/JENKINS/AnsiColor+Plugin>`_
+* `Ant Plugin <https://wiki.jenkins-ci.org/display/JENKINS/AnsiColor+Plugin>`_
+* `build timeout plugin <https://wiki.jenkins-ci.org/display/JENKINS/Build-timeout+Plugin>`_
+* `conditional buildstep <https://wiki.jenkins-ci.org/display/JENKINS/Conditional+BuildStep+Plugin>`_
+* `Copy Artifact Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Copy+Artifact+Plugin>`_
+* `Credentials Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Credentials+Plugin>`_
+* `CVS Plug-in <https://wiki.jenkins-ci.org/display/JENKINS/CVS+Plugin>`_
+* `description setter plugin <https://wiki.jenkins-ci.org/display/JENKINS/Description+Setter+Plugin>`_
+* `Email Extension Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Email-ext+plugin>`_
+* `Environment Injector Plugin <https://wiki.jenkins-ci.org/display/JENKINS/EnvInject+Plugin>`_
+* `External Monitor Job Type Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Monitoring+external+jobs>`_
+* `Gerrit Trigger <https://wiki.jenkins-ci.org/display/JENKINS/Gerrit+Trigger>`_
+* `GIT client plugin <https://wiki.jenkins-ci.org/display/JENKINS/Git+Client+Plugin>`_
+* `GIT plugin <https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin>`_
+* `Groovy <https://wiki.jenkins-ci.org/display/JENKINS/Groovy+plugin>`_
+* `Heavy Job Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Heavy+Job+Plugin>`_
+* `HTML Publisher plugin <https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin>`_
+* `Javadoc Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Javadoc+Plugin>`_
+* `Job Configuration History Plugin <https://wiki.jenkins-ci.org/display/JENKINS/JobConfigHistory+Plugin>`_
+* `JUnit Plugin <https://wiki.jenkins-ci.org/display/JENKINS/JUnit+Plugin>`_
+* `LDAP Plugin <https://wiki.jenkins-ci.org/display/JENKINS/LDAP+Plugin>`_
+* `Locale plugin <https://wiki.jenkins-ci.org/display/JENKINS/Locale+Plugin>`_
+* `Mailer Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Mailer>`_
+* `MapDB API Plugin <https://wiki.jenkins-ci.org/display/JENKINS/MapDB+API+Plugin>`_
+* `Matrix Authorization Strategy Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Matrix+Authorization+Strategy+Plugin>`_
+* `Matrix Project Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Matrix+Project+Plugin>`_
+* `Maven Integration plugin <https://wiki.jenkins-ci.org/display/JENKINS/Maven+Project+Plugin>`_
+* `Multijob plugin <https://wiki.jenkins-ci.org/display/JENKINS/Multijob+Plugin>`_
+* `Multiple SCMs plugin <https://wiki.jenkins-ci.org/display/JENKINS/Multiple+SCMs+Plugin>`_
+* `OWASP Markup Formatter Plugin <https://wiki.jenkins-ci.org/display/JENKINS/OWASP+Markup+Formatter+Plugin>`_
+* `PAM Authentication plugin <https://wiki.jenkins-ci.org/display/JENKINS/PAM+Authentication+Plugin>`_
+* `Parameterized Trigger plugin <https://wiki.jenkins-ci.org/display/JENKINS/Parameterized+Trigger+Plugin>`_
+* `Publish Over SSH <https://wiki.jenkins-ci.org/display/JENKINS/Publish+Over+SSH+Plugin>`_
+* `PWauth Security Realm <http://wiki.hudson-ci.org/display/HUDSON/pwauth>`_
+* `Run Condition Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Run+Condition+Plugin>`_
+* `SCM API Plugin <https://wiki.jenkins-ci.org/display/JENKINS/SCM+API+Plugin>`_
+* `Script Security Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Script+Security+Plugin>`_
+* `Self-Organizing Swarm Plug-in Modules <https://wiki.jenkins-ci.org/display/JENKINS/Swarm+Plugin>`_
+* `Simple Theme Plugin <http://wiki.jenkins-ci.org/display/JENKINS/Simple+Theme+Plugin>`_
+* `SSH Agent Plugin <https://wiki.jenkins-ci.org/display/JENKINS/SSH+Agent+Plugin>`_
+* `SSH Credentials Plugin <https://wiki.jenkins-ci.org/display/JENKINS/SSH+Credentials+Plugin>`_
+* `SSH Slaves plugin <http://wiki.jenkins-ci.org/display/JENKINS/SSH+Slaves+plugin>`_
+* `Subversion Plug-in <http://wiki.jenkins-ci.org/display/JENKINS/Subversion+Plugin>`_
+* `Throttle Concurrent Builds Plug-in <http://wiki.jenkins-ci.org/display/JENKINS/Throttle+Concurrent+Builds+Plugin>`_
+* `Timestamper <https://wiki.jenkins-ci.org/display/JENKINS/Timestamper>`_
+* `Token Macro Plugin <http://wiki.jenkins-ci.org/display/JENKINS/Token+Macro+Plugin>`_
+* `Translation Assistance plugin <http://wiki.jenkins-ci.org/display/JENKINS/Translation+Assistance+Plugin>`_
+* `Windows Slaves Plugin <http://wiki.jenkins-ci.org/display/JENKINS/Windows+Slaves+Plugin>`_
+* `Workflow: Step API <https://wiki.jenkins-ci.org/display/JENKINS/Workflow+Plugin>`_
 
 Jenkins jobs installation
 -------------------------
@@ -188,14 +192,14 @@ You should install the util on jenkins-slave first::
 
 Example of script that use expect for auth on cisco switch and show it’s configuration::
 
- 	spawn ssh "root@$switch_ip"
- 	set timeout 500
- 	expect "yes/no" {
- 	send "yes\r"
- 	expect "*?assword" { send "$switch_pass\r" }
- 	} "*?assword" { send "$switch_pass\r" }
- 	expect "# " { send "show run" }
- 	expect "# " { send "exit\r" }
+  spawn ssh "root@$switch_ip"
+  set timeout 500
+  expect "yes/no" {
+  send "yes\r"
+  expect "*?assword" { send "$switch_pass\r" }
+  } "*?assword" { send "$switch_pass\r" }
+  expect "# " { send "show run" }
+  expect "# " { send "exit\r" }
 
 Fuel iso updating
 -----------------
@@ -224,7 +228,3 @@ Steps:
 #. Check for errors and delete folder if there is an error.
 
 #. Sync downloaded iso with jenkins slave. You should have necessary users with rsa keys set.
-
-
-
-
