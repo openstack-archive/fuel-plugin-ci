@@ -73,7 +73,8 @@ The result of job are artifacts - logs and packages. Logs should be published on
 Jenkins plugins installation
 -----------------------------
 We recommend to install these plugins for Jenkins.
-Some of them are necessary for CI and other is just useful and make your jenkins experience easier: 
+Some of them are necessary for CI and other is just useful and make your jenkins experience easier:
+
 * `AnsiColor <https://wiki.jenkins-ci.org/display/JENKINS/AnsiColor+Plugin>`_
 * `Ant Plugin <https://wiki.jenkins-ci.org/display/JENKINS/AnsiColor+Plugin>`_
 * `build timeout plugin <https://wiki.jenkins-ci.org/display/JENKINS/Build-timeout+Plugin>`_
@@ -212,15 +213,16 @@ This script checks for new community build of Fuel and if there is new version a
 You can run the script on jenkins-slave node or any web server if you have many slave nodes.
 Steps:
 
-#. Check for the latest community iso. Using w3m utility script checks ``https://www.fuel-infra.org/release/status`` url and choose right tab:
+#. Check for the latest community iso. Using w3m utility script checks
+   ``https://www.fuel-infra.org/release/status`` url and chooses the right tab:
 
-  * the first tab is 8.0 now, we need 2nd tab with Fuel 7.0.
+   * the first tab is 8.0 now, we need 2nd tab with Fuel 7.0.
 
-  * Then we parse it and get Fuel release string.
+   * Then we parse it and get Fuel release string.
 
-  .. note:: if new Fuel version is available, you should fix the
-     script and change tab number. Also output may change between
-     linux distros and last cut field may change.
+     .. note:: if new Fuel version is available, you should fix the
+        script and change tab number. Also output may change between
+        linux distros and last cut field may change.
 
 
 #. Download torrent file from `http://seed.fuel-infra.org/fuelweb-iso/` via aria2 console torrent client.
