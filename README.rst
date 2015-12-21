@@ -30,7 +30,7 @@ These nodes should be described in ``manifests/site.pp`` with necessary classes:
 
       class { '::fuel_project::jenkins::slave':}
       class { '::fuel_project::jenkins::master':}
-      class {‘::fuel_project::web:}
+      class { '::fuel_project::web':}
 
 Run install script ``sudo puppet-manifests/bin/install_puppet_master.sh`` on every node.
 
@@ -51,7 +51,7 @@ requirements:
 * Members of core group can perform full code review (blocking or approving: +/- 2)
   and submit changes to be merged.
 
-#. Make sure you have gerrit account on review.openstack.org::
+* Make sure you have gerrit account on review.openstack.org (`see this <http://docs.openstack.org/infra/system-config/gerrit.html>`_ for the reference)::
 
     ssh -p 29418 review.openstack.org "gerrit create-account \
          --group 'Third-Party CI' \
@@ -78,7 +78,7 @@ Jenkins gerrit plugin configuration
 #. Log publication
    The result of job are artifacts - logs and packages.
    Logs should be published on special web servers, where it can be accessible via gerrit.
- Web server deploys with puppet class ``fuel_project::web``.
+   The web server deploys with puppet class ``fuel_project::web``.
 
 Logs copy via ssh by job ``fuel-plugins.publish_logs``. You should add new user with rsa key installed and necessary path accessible for write (like ``/var/www/logs``).
 
@@ -143,7 +143,7 @@ Some of them are necessary for CI and other is just useful and make your jenkins
 Jenkins jobs installation
 -------------------------
 
-Jenkins Job Builder takes simple descriptions of `Jenkins <http://jenkins-ci.org/>`_
+`Jenkins Job Builder <http://docs.openstack.org/infra/jenkins-job-builder/>`_ takes simple descriptions of `Jenkins <http://jenkins-ci.org/>`_
 jobs in `YAML <http://www.yaml.org/>`_ or `JSON <http://json.org/>`_
 format and uses them to configure Jenkins. 
 
@@ -152,7 +152,7 @@ To install JJB, run the following commands::
     git clone https://git.openstack.org/openstack-infra/jenkins-job-builder
     cd jenkins-job-builder && sudo python setup.py install
 
-JJB requires config file to running::
+Before running JJB you need to prepare a config file with the following info (fill it with your own values)::
 
      [jenkins]
      user=jenkins
@@ -160,12 +160,12 @@ JJB requires config file to running::
      url=https://jenkins.example.com
 
 
-Running::
+And update a JJB configuration using the file from the previous step::
 
     jenkins-jobs --conf yourconf.ini update path_to_repo/jjb
 
-We have some examples in our repo, it depersonalized copy of our real
-jobs. Don’t install it without reworking. You should replace necessary paths and variables.
+You may find some examples in this repo. They're depersonalized copies of real
+jobs, so don’t install them without reworking. Please replace necessary paths and variables to make them work again.
 
 Plugin test templates
 ---------------------
@@ -173,40 +173,40 @@ Plugin test templates
 Most of necessary functions can be found in `fuel-qa <https://github.com/openstack/fuel-qa>`_
 framework.
 
-All functional tests should be stored in plugin’s git repository.
-There should be special folder named plugin_test.
-Fuel-qa framework should be submodule in plugin_test folder. You can add submodule by this command:
-git submodule add https://github.com/openstack/fuel-qa
+All functional tests should be stored in ` plugin’s git repository in a special folder named ``plugin_test``.
+Fuel-qa framework should be submodule in the ``plugin_test`` folder. You can add submodule by this command:
+
+    git submodule add https://github.com/openstack/fuel-qa
 
 <pic>
 
-There is simple test in repository.
-It deploys an openstack cluster, installs the test plugin and enables it. 
+In the folder ``./plugin-test-examples/plugin_test`` you may find two simple tests.
+The first one installs a test plugin, creates a cluster and enables the plugin for this cluster.
+The second one deploys a cluster with the plugin enabled.
 
-There are two folders: helpers and tests. 
-Helpers consists two files with important functions: 
-* prepare_test_plugin - install the plugin to master node
-* activate_plugin - activate the plugin
-* assign_net_provider - allow to choose network type for cluster
-* deploy_cluster - deploy a cluster
+There are two subfolders here: ``helpers`` and ``tests``. 
+Helpers contains two files with important functions: 
+* prepare_test_plugin - installs the plugin to master node
+* activate_plugin - activates the plugin
+* assign_net_provider - allows to choose network type for cluster
+* deploy_cluster - deploys a cluster
 
-Next folder is tests and it includes tests.
-There is only one important file named test_smoke_bvt.py.
-It describes a class of test plugin and 2 tests.
-First of them just install the plugin and enable it, another try to deploy a cluster.
+The next folder  includes tests.
+In the example provided with this repo there is only one important file named test_smoke_bvt.py.
+It describes a class TestPlugin and 2 tests mentioned earlier.
 
 
 Hardware test examples
 ----------------------
 
-Main problem of hardware configuration is authorization.
-SSH does not allow enter password in script non interactively. But we can use expect utility for resolve this problem. 
+The main problem of hardware configuration is authorization.
+SSH does not allow to enter a password in a script non interactively, so ``expect`` utility may be used to avoid the problem. 
 
 You should install the util on jenkins-slave first::
 
       apt-get install expect
 
-Example of script that use expect for auth on cisco switch and show it’s configuration::
+Here is an example of a script that uses expect for auth on a switch and shows its configuration::
 
   spawn ssh "root@$switch_ip"
   set timeout 500
@@ -217,31 +217,31 @@ Example of script that use expect for auth on cisco switch and show it’s confi
   expect "# " { send "show run" }
   expect "# " { send "exit\r" }
 
-Fuel iso updating
+Fuel ISO updating
 -----------------
 
 There is a script ``fuel-plugin-ci/iso-updater/get_iso.sh``.
 
-It should be added to cron and run every 2-3 hours.
+It should be added to cron and executed every 2-3 hours.
 
-This script checks for new community build of Fuel and if there is new version available, it downloads it.
-You can run the script on jenkins-slave node or any web server if you have many slave nodes.
-Steps:
+This script checks for a new community build of Fuel and if there is a new version available, it downloads such.
+You can run the script on a jenkins-slave node or any web server if you have many slave nodes.
+Here is how the script works:
 
-#. Check for the latest community iso. Using w3m utility script checks
-   ``https://www.fuel-infra.org/release/status`` url and chooses the right tab:
+#. Check for the latest community iso. Check the
+   ``https://www.fuel-infra.org/release/status`` url using the ``w3m`` utility and chooses the right tab:
 
-   * the first tab is 8.0 now, we need 2nd tab with Fuel 7.0.
+   * the first tab is 8.0 now, so it needs the 2nd tab with Fuel 7.0.
 
-   * Then we parse it and get Fuel release string.
+   * Then it parses the tab and gets a Fuel release string.
 
      .. note:: if new Fuel version is available, you should fix the
-        script and change tab number. Also output may change between
+        script and change a tab number. Also output may change between
         linux distros and last cut field may change.
 
 
-#. Download torrent file from `http://seed.fuel-infra.org/fuelweb-iso/` via aria2 console torrent client.
+#. Download torrent file from `http://seed.fuel-infra.org/fuelweb-iso/` via ``aria2`` console torrent client.
 
 #. Check for errors and delete folder if there is an error.
 
-#. Sync downloaded iso with jenkins slave. You should have necessary users with rsa keys set.
+#. Sync downloaded iso with a jenkins slave. You should have necessary users with rsa keys set.

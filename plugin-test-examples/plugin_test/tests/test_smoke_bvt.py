@@ -37,11 +37,11 @@ class TestPlugin(TestBasic):
         """Install Plugin and create cluster
 
         Scenario:
-            1. Revert snapshot "ready_with_3_slaves"
-            2. Upload plugin to the master node
-            3. Install plugin and additional packages
-            4. Enable Neutron with tunneling segmentation
-            5. Create cluster
+            1. Revert snapshot "ready_with_2_slaves"
+            2. Upload a plugin to the master node
+            3. Install a plugin
+            4. Create a cluster
+            5. Enable athe plugin in the cluster's settings
 
         Duration 20 min
 
@@ -54,15 +54,15 @@ class TestPlugin(TestBasic):
     @log_snapshot_after_test
 
     def plugin_smoke(self):
-        """Deploy a cluster with Plugin
+        """Deploy a cluster with a plugin
 
         Scenario:
             1. Revert snapshot "ready_with_2_slaves"
-            2. Create cluster
+            2. Create a cluster
             3. Add a node with controller role
             4. Add a node with compute role
-            6. Enable Contrail plugin
-            5. Deploy cluster with plugin
+            6. Enable a plugin
+            5. Deploy a cluster with the plugin enabled
 
         Duration 90 min
 
