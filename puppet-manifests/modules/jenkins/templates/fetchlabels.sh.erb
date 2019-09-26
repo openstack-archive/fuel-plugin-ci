@@ -1,5 +1,0 @@
-#!/bin/sh
-
-set -e
-
-/usr/bin/curl -sfo '/etc/default/jenkins.labels' "<%= @jenkins_fetchlabels_url %>/<%= @fqdn %>.labels"
